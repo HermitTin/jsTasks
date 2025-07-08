@@ -1,0 +1,418 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Exo 2';
+}
+
+body {
+    background-color:rgb(247, 245, 243);
+}
+
+#header {
+    width: 100%;
+    height: 20px;
+    background-color: rgb(255, 234, 212);
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0px;
+    margin: 0;
+    transition: height 1s ease 0.5s;
+    display:block;
+    z-index: 1000;
+}
+
+#header.expanded {
+    height: 45px;
+    transition: height 1s ease;
+}
+
+#header.fastCollapse {
+    transition: height 1s ease;
+}
+
+.headerInnerContainer {
+    background-color: rgb(255, 234, 212);
+    width: 100%;
+    height: 100%;
+    padding-left: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: end;
+    position: relative;
+    z-index: 1000;
+}
+
+.headerButton {
+    width: 95px;
+    height: 100%;
+    margin-right: 15px;
+    padding: 10px;
+    padding-bottom: 5px;
+    border: solid rgba(139, 132, 126, 0.185);
+    border-top: 0;
+    border-bottom: 0;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    transition: padding-bottom 1s ease 0.5s;
+    position: relative;
+}
+
+.headerButton:hover {
+    background-color: rgb(255, 220, 185);
+}
+
+.headerButton.expanded {
+    padding-bottom: 10px;
+    transition: padding-bottom 1s ease;
+}
+
+.headerButton.fastCollapse {
+    transition: padding-bottom 1s ease;
+}
+
+.headerButton p {
+    font-size: 10px;
+    transition: font-size 1s ease 0.5s;
+    pointer-events: none;
+}
+
+.headerButton.expanded p {
+    font-size: 16px;
+    transition: font-size 1s ease;
+}
+
+.headerButton.fastCollapse p {
+    transition: font-size 1s ease;
+}
+
+.headerButton.isActive {
+    background-color: rgb(255, 210, 161);
+}
+
+.headerSecond {
+    width: 100%;
+    height: 35px;
+    background-color: rgb(255, 210, 161);
+    position: absolute;
+    top: -30px;
+    left: 0;
+    padding: 5px;
+    padding-left: 50px;
+    padding-bottom: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: end;
+    z-index: 1;
+    transition: top 0.4s ease-out;
+}
+
+.headerSecond.expanded {
+    top: 35px;
+}
+
+.headerSecondButton {
+    width: 80px;
+    height: 80%;
+    margin-right: 12px;
+    padding: 5px;
+    padding-bottom: 5px;
+    border: solid rgba(139, 132, 126, 0.15);
+    border-top: 0;
+    border-bottom: 0;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    position: relative;
+}
+
+.headerSecondButton p {
+    pointer-events: none;
+    font-size: 14px;
+}
+
+.headerSecondButton:hover {
+    background-color: rgb(242, 200, 159);
+}
+
+.headerSecondButton.isActive {
+    background-color: rgb(225, 192, 159);
+}
+
+.headerThird {
+    width: 100%;
+    height: 30px;
+    background-color: rgb(225, 192, 159);
+    position: absolute;
+    top: -30px;
+    left: 0;
+    padding: 5px;
+    padding-left: 50px;
+    padding-bottom: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: end;
+    z-index: 0;
+    transition: top 0.3s ease-out;
+}
+
+.headerThird.expanded{
+    top: 65px;
+}
+
+.headerThirdButton {
+    width: 70px;
+    height: 80%;
+    margin: 2px;
+    margin-right: 10px;
+    padding: 5px;
+    padding-bottom: 5px;
+    border: solid rgba(139, 132, 126, 0.10);
+    border-top: 0;
+    border-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: center;
+    position: relative;
+}
+
+.headerThirdButton p {
+    pointer-events: none;
+    font-size: 12px;
+}
+
+.headerThirdButton:hover {
+    background-color: rgb(255, 233, 212);
+}
+
+.headerThirdButton.isActive {
+    background-color: rgb(255, 247, 240);
+}
+
+.mainContainer {
+    width: 90%;
+    min-height: 100%;
+    margin: 5%;
+    margin-top: 3%;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.homePageChapterButton {
+    background-color:rgb(255, 251, 247);
+    border-radius: 10px;
+    border: solid rgba(139, 132, 126, 0.15);
+    min-width: 15%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: left;
+    position: relative;
+    margin: 1%;
+    padding: 1%;
+    min-height: 1100px;
+}
+
+.homePageChapterButton p {
+    pointer-events: none;
+}
+
+/* .homePageChapterButton:hover {
+    background-color:rgb(247, 247, 255);
+}
+
+.homePageChapterButton:active {
+    background-color:rgb(229, 229, 240);
+} */
+
+.homePageSectionButton {
+    background-color:rgb(255, 242, 228);
+    border-radius: 10px;
+    border: solid rgba(139, 132, 126, 0.15);
+    min-width: 300px;
+    max-width: 300px;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: left;
+    position: relative;
+    margin: 5px;
+    padding: 5px;
+}
+
+.homePageSectionButton p {
+    pointer-events: none;
+}
+
+/* .homePageSectionButton:hover {
+    background-color:rgb(234, 228, 255);
+}
+
+.homePageSectionButton:active {
+    background-color:rgb(221, 215, 243);
+} */
+
+.homePageTaskButtonContainer {
+    min-width: 300px;
+    max-width: 300px;    
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: left;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.homePageTaskButton {
+    background-color:rgb(255, 251, 247);
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: center;
+    border-radius: 10px;
+    min-width: 38px;
+    border: solid rgba(139, 132, 126, 0.15);
+    position: relative;
+    margin: 4px;
+    padding: 4px;
+}
+
+.homePageTaskButton p {
+    pointer-events: none;
+}
+
+.homePageTaskButton:hover {
+    background-color:rgb(225, 228, 251);
+}
+
+.homePageTaskButton:active {
+    background-color:rgb(202, 205, 232);
+}
+
+.taskPageContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.resultContainer {
+    width: 50%;
+    height: 100%;
+    margin: 1%;
+}
+
+.codeContainer {
+    width: 50%;
+    height: 100%;
+    margin: 1%;
+}
+
+.resultFrame {
+    border: solid rgba(139, 132, 126, 0.15);
+    border-radius: 10px;
+    min-width: 100%;
+    height: 600px;
+    margin-bottom: 50px;
+    border-radius: 10px;
+}
+
+.consoleOutput {
+    min-width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+
+}
+
+.consoleOutputDiv {
+    border: solid rgba(139, 132, 126, 0.15);
+    overflow-y: scroll;
+    white-space: pre;
+    background-color: rgb(255, 255, 255);
+    min-height: 200px;
+    max-height: 200px;
+    margin-top: 15px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.taskTextConteiner {
+    border: solid rgba(139, 132, 126, 0.15);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: baseline;
+    width: 95%;
+    height: 150px;
+    margin-bottom: 10px;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    white-space: pre;
+}
+
+.taskTextConteiner p {
+    max-width: 100%;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.taskCode {
+    background-color: #0d1117;
+    width: 95%;
+    height: 685px;
+    margin-top: 15px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.taskCode p {
+    white-space: pre;
+    font-family: monospace;
+}
+
+.navButton { 
+    position:fixed;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    bottom: 50px;
+    background-size: contain;
+    padding: 2px;
+    margin: 5px;
+}
+
+.navButton:hover {
+    background-color:rgb(226, 221, 216);
+}
+
+.navButton:active {
+    background-color:rgb(211, 202, 194);
+}
+
+.navButtonBack {
+    background-image: url("/img/left_arrow.png");
+    left: 20px;
+}
+
+.navButtonNext {
+    background-image: url("/img/right_arrow.png");
+    right: 20px;
+}

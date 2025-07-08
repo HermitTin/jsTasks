@@ -3,7 +3,7 @@
 //elements cashing
 const header = document.getElementById("header");
 const headerInnerContainer = document.getElementById("headerInnerContainer")
-const manifestFile = "manifest.json"
+const manifestFile = "./manifest.json"
 const headerSecond = document.getElementById("headerSecond");
 const headerThird = document.getElementById("headerThird");
 const mainContainer = document.getElementById("mainContainer");
@@ -279,9 +279,9 @@ async function getHtml(taskFullNumber) {
     let chapterNumber = taskFullNumber[0];
     let path;
     if (chapterNumber < 5) {
-        path = `/tasks/${chapterNumber}/task.html`;
+        path = `./tasks/${chapterNumber}/task.html`;
     } else {
-        path = `/tasks/${chapterNumber}/${taskFullNumber}.html`;
+        path = `./tasks/${chapterNumber}/${taskFullNumber}.html`;
     }
     const rawHtmlData = await taskFileRequest(path);
     let taskHtmlPage = parseText(rawHtmlData);
@@ -290,7 +290,7 @@ async function getHtml(taskFullNumber) {
 }
 
 async function getJS(taskFullNumber) {
-    let path = `/tasks/${taskFullNumber[0]}/`;
+    let path = `./tasks/${taskFullNumber[0]}/`;
     const jsText = await taskFileRequest(`${path+taskFullNumber}.js`);
     return jsText;
 }

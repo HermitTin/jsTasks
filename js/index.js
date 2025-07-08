@@ -303,12 +303,7 @@ function parseText(src) {
 
 function modifyHtml(page, path, number) {
     let scriptObjects = page.getElementsByTagName("script");
-    if (scriptObjects[2]) {         //clear live server multiple code injection
-        scriptObjects[0].innerHTML = "";
-        scriptObjects[2].src = `${path}${number}.js`;
-    } else {
-        scriptObjects[1].src = `${path}${number}.js`;
-    }
+    scriptObjects[1].src = `./${path}${number}.js`;
     return page;
 }
 

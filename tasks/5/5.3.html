@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="5.3.css">
+    <title>Document</title>
+</head>
+<body>
+<div style = "margin: 10px; padding: 10px;"><h1>5.3.1</h1>
+    <div><input id = 'input531' style = "margin: 5px" value = 2></div>
+    <div><button id = 'button531' style = "margin: 10px; padding: 10px;">Calculate</button></div>
+    <div id = 'output531' style = "margin: 10px; padding: 10px;"><p></p></div>
+</div>
+
+<div style = "margin: 10px; padding: 10px;"><h1>5.3.2</h1>
+    <div><input id = 'inputFirst532' style = "margin: 5px" value = 2></div>
+    <div><input id = 'inputSecond532' style = "margin: 5px" value = 3></div>
+    <div><button id = 'button532' style = "margin: 10px; padding: 10px;">Max</button></div>
+    <div id = 'output532' style = "margin: 10px; padding: 10px;"></div>
+</div>
+
+<div style = "margin: 10px; padding: 10px;"><h1>5.3.3</h1>
+    <div><input id = 'input533' style = "margin: 5px" value = 123></div>
+    <div><button id = 'button533' style = "margin: 10px; padding: 10px;">Calculate</button></div>
+    <div id = 'output533' style = "margin: 10px; padding: 10px;"></div>
+</div>
+
+<div style = "margin: 10px; padding: 10px;"><h1>5.3.4</h1>
+    <div><input id = 'input534' style = "margin: 5px" value = "qwerty"></div>
+    <div><button id = 'button534' style = "margin: 10px; padding: 10px;">Reverse</button></div>
+    <div style = "margin: 10px; padding: 10px;"><p id = 'output534'></p></div>
+</div>
+
+<div style = "margin: 10px; padding: 10px;">
+    <h1>5.3.5</h1>
+    <div><button id = 'button535' style = "margin: 10px; padding: 10px;">Fill</button></div>
+    <div class = "wrapper">
+        <div class = "div535"></div>
+        <div class = "div535"></div>
+        <div class = "div535"></div>
+        <div class = "div535"></div>
+        <div class = "div535"></div>
+        <div class = "div535"></div>
+    </div>
+</div>
+
+<div><h1>5.3.6</h1>
+<div style = "margin: 10px; padding: 10px;"><h1>5.3.6</h1>
+    <div><input id = 'input536' style = "margin: 5px" value = 2></div>
+    <div><button id = 'button536' style = "margin: 10px; padding: 10px;">Calculate</button></div>
+    <div id = 'output536' style = "margin: 10px; padding: 10px;"><p></p></div>
+</div>
+</div>
+
+
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="5.3.js"></script>
+</html>

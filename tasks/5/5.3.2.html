@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div style = "margin: 10px; padding: 10px;"><h1>5.3.2</h1>
+    <div><input id = 'inputFirst532' style = "margin: 5px" value = 2></div>
+    <div><input id = 'inputSecond532' style = "margin: 5px" value = 3></div>
+    <div><button id = 'button532' style = "margin: 10px; padding: 10px;">Max</button></div>
+    <div id = 'output532' style = "margin: 10px; padding: 10px;"></div>
+</div>
+
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="5.3.2.js"></script>
+</html>

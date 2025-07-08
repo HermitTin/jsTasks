@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div style = "margin: 10px; padding: 10px;"><h1>5.3.4</h1>
+    <div><input id = 'input534' style = "margin: 5px" value = "qwerty"></div>
+    <div><button id = 'button534' style = "margin: 10px; padding: 10px;">Reverse</button></div>
+    <div style = "margin: 10px; padding: 10px;"><p id = 'output534'></p></div>
+</div>
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="5.3.4.js"></script>
+</html>

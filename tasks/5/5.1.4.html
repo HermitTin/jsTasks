@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div class = 'value' style = "width: 200px; height: 200px; margin: 5px; background-color: antiquewhite; text-align: center; padding: 10px;">2</div>
+<div class = 'value' style = "width: 200px; height: 200px; margin: 5px; background-color: rgb(239, 209, 169); text-align: center; padding: 10px;">3</div>
+<div class = 'value' style = "width: 200px; height: 200px; margin: 5px; background-color: rgb(236, 181, 108); text-align: center; padding: 10px;">4</div>
+<div class = 'value' style = "width: 200px; height: 200px; margin: 5px; background-color: rgb(229, 163, 75); text-align: center; padding: 10px;">5</div>
+
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="5.1.4.js"></script>
+</html>

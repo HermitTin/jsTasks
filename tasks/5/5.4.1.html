@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .taskDiv {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class = "taskDiv" id = "divFirst" style = "width: 200px; height: 100px; background-color: bisque;">qwerty</div>
+    <div class = "taskDiv" id = "divSecond" style = "width: 200px; height: 100px; background-color: bisque;">asdfgh</div>
+    <div class = "taskDiv" id = "divThird" style = "width: 200px; height: 100px; background-color: bisque;">zxcvbn</div>
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="5.3.1.js"></script>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>5.4.2</h1>
+    <button class = "button542">Display links</button>
+    <div id = "input542" class = "verticalContentAligh">
+        <a href = "5.4.1.html" class = "centerContent a542">ref1</a>
+        <a href = "5.3.1.html" class = "centerContent a542">ref2</a>
+        <a href = "5.2.1.html" class = "centerContent a542">ref3</a>
+    </div>
+    <div id = "output542" class = "verticalContentAligh"></div>
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="5.3.1.js"></script>
+</html>

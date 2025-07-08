@@ -408,11 +408,11 @@ body {
 }
 
 .navButtonBack {
-    background-image: url("/img/left_arrow.png");
+    background-image: url("./img/left_arrow.png");
     left: 20px;
 }
 
 .navButtonNext {
-    background-image: url("/img/right_arrow.png");
+    background-image: url("./img/right_arrow.png");
     right: 20px;
 }

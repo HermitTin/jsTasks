@@ -211,7 +211,7 @@ function createNavButtons() {
     }
     let maxChapterNumber = Object.keys(manifestData).length;
     let maxGroupNumber = Object.keys(manifestData[`task ${maxChapterNumber}`]).length;
-    let maxTaskNumber = manifestData[`task ${maxChapterNumber}`][`task group ${maxChapterNumber}.${maxChapterNumber}`].length;
+    let maxTaskNumber = manifestData[`task ${maxChapterNumber}`][`task group ${maxChapterNumber}.${maxGroupNumber}`].length;
     let maxNumber = `${maxChapterNumber}.${maxGroupNumber}.${maxTaskNumber}`;
     if (activeTaskButtonNumber != maxNumber) {
         createItem("div", "navButton navButtonNext", getNavButtonsId("nav button task ", +1), mainContainer);

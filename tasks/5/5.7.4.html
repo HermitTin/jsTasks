@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .output574 {
+            transition: all 0.3s ease-in;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>5.7.4</h1>
+    <div style = "width:100px; height:30px; background-color:bisque; margin:5px; transform: rotate(0);" id = "output574_1" class = "output574">qwertyu</div>
+    <div style = "width:100px; height:30px; background-color:bisque; margin:5px; transform: rotate(0);" id = "output574_2" class = "output574">asdfghj</div>
+    <div style = "width:100px; height:30px; background-color:bisque; margin:5px; transform: rotate(0);" id = "output574_3" class = "output574">zxcvbnm</div>
+</div>
+
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="5.7.4.js"></script>
+</html>

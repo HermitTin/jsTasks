@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .taskDiv {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>5.5.1</h1>
+    <div><input id = 'input551' style = "margin: 5px" value = "2025-12-31"></div>
+    <div><button id = 'button551' style = "margin: 10px; padding: 10px;">Split date into parts</button></div>
+    <div style = "width: 100px; height:100px;" id = "output1"></div>
+    <div style = "width: 100px; height:100px;" id = "output2"></div>
+    <div style = "width: 100px; height:100px;" id = "output3"></div>
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="5.5.1.js"></script>
+</html>

@@ -52,23 +52,6 @@ async function taskFileRequest(path) {
 }
 
 //animations
-function headerAnimationWrapper() {
-    let currentState;
-
-    header.addEventListener("mouseenter", () => {
-        currentState = "animating";
-        headerExpand();
-        setTimeout(() => currentState = "waiting", 500);
-    });
-
-    header.addEventListener("mouseleave", () => {
-        if (currentState === "animating") {
-            headerCollapseEarly();
-        } else {
-            headerCollapse();
-        }
-    });
-}
 
 function headerExpand() {
     header.classList.add("expanded");
@@ -285,7 +268,7 @@ async function getHtml(taskFullNumber) {
     }
     const rawHtmlData = await taskFileRequest(path);
     let taskHtmlPage = parseText(rawHtmlData);
-    taskHtmlPage = modifyHtml(taskHtmlPage, `/tasks/${chapterNumber}/`, taskFullNumber);
+    taskHtmlPage = modifyHtml(taskHtmlPage, `./tasks/${chapterNumber}/`, taskFullNumber);
     return taskHtmlPage;
 }
 
@@ -303,7 +286,12 @@ function parseText(src) {
 
 function modifyHtml(page, path, number) {
     let scriptObjects = page.getElementsByTagName("script");
-    scriptObjects[1].src = `./${path}${number}.js`;
+    if (scriptObjects[2]) {         //clear live server multiple code injection
+        scriptObjects[0].innerHTML = "";
+        scriptObjects[2].src = `${path}${number}.js`;
+    } else {
+        scriptObjects[1].src = `${path}${number}.js`;
+    }
     return page;
 }
 
@@ -364,6 +352,24 @@ function clearInnerContent(parent) {
 }
 
 //handlers
+function headerAnimationWrapper() {
+    let currentState;
+
+    header.addEventListener("mouseenter", () => {
+        currentState = "animating";
+        headerExpand();
+        setTimeout(() => currentState = "waiting", 500);
+    });
+
+    header.addEventListener("mouseleave", () => {
+        if (currentState === "animating") {
+            headerCollapseEarly();
+        } else {
+            headerCollapse();
+        }
+    });
+}
+
 function headerButtonPressed(event) {
     let clickedButton = event.target.closest(".headerButton");
     if (!clickedButton) {
@@ -373,11 +379,13 @@ function headerButtonPressed(event) {
         }     
     }    
 
-    let sameRowButtons = document.getElementsByClassName(clickedButton.classList);
-    for (let i = 0; i < sameRowButtons.length; i++) {
-        sameRowButtons[i].classList.remove("isActive")
+    if (clickedButton) {
+        let sameRowButtons = document.getElementsByClassName(clickedButton.classList);
+        for (let i = 0; i < sameRowButtons.length; i++) {
+            sameRowButtons[i].classList.remove("isActive")
+        }
+        clickedButton.classList.add("isActive");
     }
-    clickedButton.classList.add("isActive");
 }
 
 function headerButtonClicked(event) {

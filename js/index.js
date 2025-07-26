@@ -127,7 +127,7 @@ function createHeaderButtons(row, clickedButton) {
     if (row === 1) {
         clearInnerContent(headerSecond);
         const id = clickedButton.id.split(" ");
-        const chapterNumber = id[id.length - 1][0];
+        const chapterNumber = +id[id.length - 1];
         let elementsCount = Object.keys(manifestData[`task ${chapterNumber}`]).length;
         createButtonsSet(`Section ${chapterNumber}.`, "headerSecondButton",
              `task group ${chapterNumber}.`, headerSecond, elementsCount)
@@ -138,7 +138,7 @@ function createHeaderButtons(row, clickedButton) {
         const id = clickedButton.id.split(" ");
         const taskNumber = id[id.length - 1];
         const sectionNumber = id[id.length - 1].split(".")[1];
-        const chapterNumber = taskNumber[0];
+        const chapterNumber = taskNumber.split(".")[0];
         let elementsCount = Object.keys(manifestData[`task ${chapterNumber}`][`task group ${chapterNumber}.${sectionNumber}`]).length;
         createButtonsSet(`Task ${chapterNumber}.${sectionNumber}.`, "headerThirdButton",
              `task number ${chapterNumber}.${sectionNumber}.`, headerThird, elementsCount);

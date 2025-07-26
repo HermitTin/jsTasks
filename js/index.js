@@ -221,8 +221,8 @@ function createNavButtons() {
 function getNavButtonsId(nameTemplate, step) {
     let currentTaskFullNumber = (headerThird.getElementsByClassName("isActive")[0]).id.split(" ").at(-1);
     let targetTaskFullNumber = "";
-    let targetChapterNumber = +currentTaskFullNumber[0];
-    let targetGroupNumber = +currentTaskFullNumber[2];
+    let targetChapterNumber = +currentTaskFullNumber.split(".")[0];
+    let targetGroupNumber = +currentTaskFullNumber.split(".")[1];
 
     if (step > 0) {
         if (currentTaskFullNumber.split(".")[2] >= headerThird.children.length) {
@@ -235,7 +235,7 @@ function getNavButtonsId(nameTemplate, step) {
             }
 
         } else {
-           targetTaskFullNumber = `${targetChapterNumber}.${targetGroupNumber}.${+currentTaskFullNumber[4] + 1}`;
+           targetTaskFullNumber = `${targetChapterNumber}.${targetGroupNumber}.${+currentTaskFullNumber.split(".")[2] + 1}`;
         }
     } else {
         if (currentTaskFullNumber.split(".")[2] == 1) {
@@ -247,8 +247,8 @@ function getNavButtonsId(nameTemplate, step) {
                 targetTaskFullNumber = `${targetChapterNumber}.${targetGroupNumber}.${targetTaskNumber}`;
             } else {
                 let targetTaskNumber = Object.keys(manifestData[`task ${targetChapterNumber}`]
-                    [`task group ${targetChapterNumber}.${targetGroupNumber}`].length);
-                targetTaskFullNumber = `${targetChapterNumber}.${targetGroupNumber}.${targetTaskNumber}`;
+                    [`task group ${targetChapterNumber}.${targetGroupNumber - 1}`]).length;
+                targetTaskFullNumber = `${targetChapterNumber}.${targetGroupNumber - 1}.${targetTaskNumber}`;
             }
         } else {
             targetTaskFullNumber = `${targetChapterNumber}.${targetGroupNumber}.${+currentTaskFullNumber.split(".")[2] - 1}`

@@ -127,7 +127,7 @@ function createHeaderButtons(row, clickedButton) {
     if (row === 1) {
         clearInnerContent(headerSecond);
         const id = clickedButton.id.split(" ");
-        const chapterNumber = +id[id.length - 1];
+        const chapterNumber = +id[id.length - 1].split(".")[0];
         let elementsCount = Object.keys(manifestData[`task ${chapterNumber}`]).length;
         createButtonsSet(`Section ${chapterNumber}.`, "headerSecondButton",
              `task group ${chapterNumber}.`, headerSecond, elementsCount)

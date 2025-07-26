@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 5px;
+        }
+
+        table {
+            border: solid;
+        }
+        tr {
+            border: solid;
+        }
+        td {
+            border: solid;
+            width:50px;
+            height:30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>6.2.2</h1>
+    <div>
+        <p>rows</p>
+        <input id="input622_1" value="3">
+        <p>columns</p>
+        <input id="input622_2" value="4">
+    </div>
+    <div>
+        <button id="button622">Print table</button>
+    </div>
+    <div id="output622">
+    </div>
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="6.2.2.js"></script>
+</html>

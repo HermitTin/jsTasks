@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {margin:5px}
+    </style>
+</head>
+<body>
+<div>
+    <h1>6.5.5</h1>
+    <div>
+        <input id="input655_1" class="input655" value="1,2,3,4,5">
+        <input id="input655_2" class="input655" value="3,4,5,6,7">
+    </div>
+    <div>
+        <button id="button655">Print same numbers</button>
+    </div>
+    <div>
+        <p id="output655"></p>
+    </div>
+</div>
+
+
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="6.5.5.js"></script>
+</html>

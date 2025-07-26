@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 5px;
+        }
+
+        table {
+            border: solid;
+        }
+        tr {
+            border: solid;
+        }
+        td {
+            border: solid;
+            width:50px;
+            height:30px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>6.2.4</h1>
+    <div>
+        <button id="button624">Print table</button>
+    </div>
+        <div id="output624">
+    </div>
+</div>
+
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="6.2.4.js"></script>
+</html>

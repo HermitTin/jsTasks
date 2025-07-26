@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+<body>
+<div>
+    <h1>6.1.5</h1>
+    <div>
+        <button id="button615">Remove last list element</button>
+    </div>
+    <div>
+        <ul class="output615" id="output615">
+            <li>qwerty</li>
+            <li>asdfgh</li>
+            <li>zxcvbn</li>
+            <li>123456</li>
+        </ul>
+    </div>
+</div>
+
+
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="6.1.5.js"></script>
+</html>

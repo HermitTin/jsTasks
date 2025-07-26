@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin:5px
+        }
+        td {
+            border:solid;
+        }
+    </style>
+</head>
+<body>
+<h1>6.4.3</h1>
+    <div>
+        <input id="input643_1" class="input643" value="qwerty">
+        <input id="input643_2" class="input643" value="asdfgh">
+        <input id="input643_3" class="input643" value="zxcvbn">
+    </div>
+    <div>
+        <button id="button643">Add new row</button>
+    </div>
+    <div>
+        <table id="output643">
+
+        </table>
+    </div>
+</body>
+
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="6.4.3.js"></script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>7.2.3</h1>
+    <div>
+        <input type="checkbox" class="inputs723" name="English" value="English"> English
+    </div>
+    <div>
+        <input type="checkbox" class="inputs723" name="France" value="France"> France
+    </div>
+    <div>
+        <input type="checkbox" class="inputs723" name="German" value="German"> German
+    </div>
+    <div>
+        <input type="checkbox" class="inputs723" name="Spain" value="Spain"> Spain
+    </div>
+    <div>
+        <p id="output723"></p>
+    </div>
+</body>
+
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="7.2.3.js"></script>
+</html>

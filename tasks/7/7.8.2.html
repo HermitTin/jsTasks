@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin:5px;
+        }
+        #output762 {
+            width: 400px;
+            white-space: normal;
+        }
+        #output782 span {
+            user-select: none;    
+            -webkit-user-select: none; 
+            -moz-user-select: none;    
+            -ms-user-select: none; 
+        }
+    </style>
+</head>
+<body>
+    <h1>7.8.2</h1>
+    <div>
+        <p id="output782">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="7.8.2.js"></script>
+</html>

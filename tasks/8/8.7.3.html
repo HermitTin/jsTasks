@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin:5px;
+        }
+        .shuffledDiv {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+        }
+        #shuffledDiv1 {
+            background-color: rebeccapurple;
+            top: 50px;
+            left: 50px;
+        }
+        #shuffledDiv2 {
+            background-color: yellowgreen;
+            top: 150px;
+            left: 150px;
+        }
+        #shuffledDiv3 {
+            background-color: orange;
+            top: 50px;
+            left: 150px;
+        }
+        #shuffledDiv4 {
+            background-color: lightskyblue;
+            top: 150px;
+            left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>8.7.3</h1>
+    <div id="output873">
+        <div class="shuffledDiv" id="shuffledDiv1"></div>
+        <div class="shuffledDiv" id="shuffledDiv2"></div>
+        <div class="shuffledDiv" id="shuffledDiv3"></div>
+        <div class="shuffledDiv" id="shuffledDiv4"></div>
+    </div>
+</body>
+
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="8.7.3.js"></script>
+</html>

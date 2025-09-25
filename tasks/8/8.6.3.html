@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin:5px;
+        }
+        a:visited {
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <h1>8.6.3</h1>
+    <div>
+        <ul id="output863">
+            <li><a href="123.html">111</a></li>
+            <li><a href="file:///e%3A/JS_Study/wrapper/tasks/8/8.6.3.html">222</a></li>
+            <li><a href="qwerty.html">333</a></li>
+        </ul>
+    </div>
+</body>
+
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="8.6.3.js"></script>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 5px;
+        }
+        .menuItem {
+            padding:5px;
+            display:flex;
+            flex-direction: column;
+            width: 150px;
+            background-color: lightgrey;
+            justify-content: center;
+            align-items: center;
+        }
+        .subMenuItem {
+            width: 140px;
+            display: none;
+        }
+        .expanded {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <h1>8.9.1</h1>
+    <div>
+        <div class="menuItem">
+            <p>Item 1</p>
+            <div class="subMenuItem">
+                <ul>
+                    <li>Item 1.1</li>
+                    <li>Item 1.2</li>
+                    <li>Item 1.3</li>
+                    <li>Item 1.4</li>
+                </ul>
+            </div>
+        </div>
+        <div class="menuItem">
+            <p>Item 2</p>
+            <div class="subMenuItem">
+                <ul>
+                    <li>Item 2.1</li>
+                    <li>Item 2.2</li>
+                    <li>Item 2.3</li>
+                    <li>Item 2.4</li>
+                </ul>
+            </div>
+        </div>
+        <div class="menuItem">
+            <p>Item 3</p>
+            <div class="subMenuItem">
+                <ul>
+                    <li>Item 3.1</li>
+                    <li>Item 3.2</li>
+                    <li>Item 3.3</li>
+                    <li>Item 3.4</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+    </div>
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="8.9.1.js"></script>
+</html>

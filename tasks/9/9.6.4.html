@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>9.6.4</h1>
+    <div id="output964">
+        <input type="checkbox" name="checkbox1">
+        <label for="checkbox1">1</label>
+        <input type="checkbox" name="checkbox2">
+        <label for="checkbox2">2</label>
+        <input type="checkbox" name="checkbox3">
+        <label for="checkbox3">3</label>
+        <input type="checkbox" name="checkbox4">
+        <label for="checkbox4">4</label>
+        <input type="checkbox" name="checkbox5">
+        <label for="checkbox5">5</label>
+    </div>
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="9.6.4.js"></script>
+</html>

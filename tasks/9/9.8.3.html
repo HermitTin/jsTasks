@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 5px;
+            white-space: pre;
+        }
+        table {
+            border: solid 2px;
+        }
+        td {
+            border: solid 1px;
+            width: 50px;
+            height: 50px;
+        }
+        .tableHead {
+            background-color: lightgrey;
+        }
+    </style>
+</head>
+<body>
+    <h1>9.8.3</h1>
+    <div>
+        <table id="output983">
+            <tr>
+                <td class="tableHead">Head1</td>
+                <td class="tableHead">Head2</td>
+                <td class="tableHead">Head3</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>6</td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>5</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>4</td>
+                <td>7</td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="9.8.3.js"></script>
+</html>

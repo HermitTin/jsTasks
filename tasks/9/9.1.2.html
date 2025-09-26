@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin:5px;
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+    <h1>9.1.2</h1>
+    <div id="input912">
+        <a href="https://developer.mozilla.org/ru/docs/Web/HTML/Reference/Elements/input">111</a>
+        <a href="file:///e%3A/JS_Study/wrapper/tasks/9/9.1.2.html">222</a>
+        <a href="https://developer.mozilla.org/ru/docs/Web/HTML/Reference/Elements/a">333</a>
+    </div>
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="9.1.2.js"></script>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin:5px;
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+    <h1>9.2.2</h1>
+    <div>
+        <input id="input922_1" type="number" value="1">
+        <input id="input922_2" type="number" value="6">
+    </div>
+    <div><button id="button922">Calculate fraction period</button></div>
+    <div id="output922"></div>
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="9.2.2.js"></script>
+</html>

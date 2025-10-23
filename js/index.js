@@ -259,7 +259,7 @@ function getNavButtonsId(nameTemplate, step) {
 }
 
 async function getHtml(taskFullNumber) {
-    let chapterNumber = taskFullNumber[0];
+    let chapterNumber = taskFullNumber.split(".")[0];
     let path;
     if (chapterNumber < 5) {
         path = `./tasks/${chapterNumber}/task.html`;
@@ -457,5 +457,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     mainContainer.addEventListener("click", taskPageButtonClicked);
 
 })
+
 
 

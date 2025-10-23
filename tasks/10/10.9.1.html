@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 5px;
+            white-space: pre;
+        }
+        #inputs{
+            width: 100px;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <h1>10.9.1</h1>
+    <div id="inputs">
+        <p>Enter coordinates (0-400)</p>
+        <input id="input1091_1" value="200,200">
+        <p>Enter angle (0-360)</p>
+        <input id="input1091_2" value="90">
+        <button id="button1091">Print arrow</button>
+    </div>
+    <div>
+        <canvas id="canvas1091" width="400" height="400"></canvas>
+    </div>
+</body>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="10.9.1.js"></script>
+</html>

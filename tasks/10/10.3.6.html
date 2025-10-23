@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 5px;
+            white-space: pre;
+        }
+        #output1036 {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            vertical-align: middle;
+        }
+        .content {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>10.3.6</h1>
+    <div id="output1036">
+        <div class="content"></div>
+        <div class="content"></div>
+        <div class="content"></div>
+    </div>
+<script>
+const consoleOriginal = console.log;
+console.log = function (...args) {
+    consoleOriginal.apply(console, args);
+    const consoleMessage = args.map((msg) => {
+        if (typeof msg === "object") {
+            return JSON.stringify(msg, null, 2); 
+        } else {
+            return String(msg);
+        }
+    }).join(" ");
+    const message = {
+        type: 'console-log',
+        payload: consoleMessage
+    }
+    window.parent.postMessage(message, "*");
+}
+</script>
+<script src="10.3.6.js"></script>
+</html>

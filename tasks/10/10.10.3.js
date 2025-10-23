@@ -4,7 +4,7 @@ const canvas = document.getElementById("canvas10103");
 const ctx = canvas.getContext("2d");
 
 const img = new Image();
-img.src = "./clock.png";
+img.src = "../img/clock.png";
 img.onload = function () {
   ctx.drawImage(img, 0, 0, 400, 400);
 };
@@ -58,4 +58,5 @@ function drawArrows(img) {
   ctx.lineWidth = 9;
   ctx.stroke();
   ctx.restore();
+
 }

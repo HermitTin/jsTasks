@@ -273,7 +273,7 @@ async function getHtml(taskFullNumber) {
 }
 
 async function getJS(taskFullNumber) {
-    let path = `./tasks/${taskFullNumber[0]}/`;
+    let path = `./tasks/${taskFullNumber.split(".")[0]}/`;
     const jsText = await taskFileRequest(`${path+taskFullNumber}.js`);
     return jsText;
 }
@@ -457,6 +457,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     mainContainer.addEventListener("click", taskPageButtonClicked);
 
 })
+
 
 
 
